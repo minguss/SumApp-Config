@@ -1,0 +1,26 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: sumapp
+  labels:
+    app: sumapp
+spec:
+  selector:
+    matchLabels:
+      app: sumapp
+      version: IMAGE_TAG_PLACEHOLDER
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sumapp
+        version: IMAGE_TAG_PLACEHOLDER
+    spec:
+      containers:
+      - name: sumapp
+        image: devcluster.icp:8500/devops/sumapp:IMAGE_TAG_PLACEHOLDER
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9080
+    imagePullSecrets:
+    - name: regcred
